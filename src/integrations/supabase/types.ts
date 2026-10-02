@@ -317,6 +317,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      record_material_download: {
+        Args: { _material_id: string }
+        Returns: string
+      }
       request_withdrawal: {
         Args: {
           _account_name: string
