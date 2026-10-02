@@ -126,7 +126,7 @@ function HomePage() {
                   <p className="font-display text-2xl font-semibold text-card-foreground">Build your study profile</p>
                   <p className="mt-1 text-sm leading-6 text-muted-foreground">Search, select, and the menu will close automatically.</p>
                 </div>
-                <span className="rounded-sm bg-secondary px-2 py-1 font-mono text-[10px] uppercase text-secondary-foreground">{user ? "Saved to account" : "No account needed"}</span>
+                <span className="rounded-sm bg-secondary px-2 py-1 font-mono text-[10px] uppercase text-secondary-foreground">{user ? "Signed in" : "No account needed"}</span>
               </div>
 
               <div className="space-y-5">
