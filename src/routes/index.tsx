@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 
 import { SearchSelect, type SearchOption } from "@/components/search-select";
 import { SyllabossLogo } from "@/components/syllaboss-logo";
+import { UserMenu } from "@/components/user-menu";
+import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import courses from "@/data/courses.json";
 import institutions from "@/data/institutions.json";
@@ -51,11 +53,12 @@ function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const institutionCount = useMemo(() => new Intl.NumberFormat("en-NG").format(institutionOptions.length), []);
+  const { user } = useAuth();
   const canStart = Boolean(institution && course);
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
-      <header className="border-b border-border bg-background/95">
+      <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
         <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-4 sm:flex sm:px-6 lg:px-8">
           <div className="min-w-0 sm:mr-auto">
             <SyllabossLogo />
@@ -65,6 +68,7 @@ function HomePage() {
             <a href="#method" className="transition-colors hover:text-foreground">How it works</a>
             <a href="#directory" className="transition-colors hover:text-foreground">Directory</a>
           </nav>
+          <div className="hidden md:block"><UserMenu /></div>
           <Button
             variant="ghost"
             size="icon"
@@ -82,12 +86,13 @@ function HomePage() {
                 {label}
               </a>
             ))}
+            <div className="mt-2 border-t border-border pt-3"><UserMenu /></div>
           </nav>
         )}
       </header>
 
       <main>
-        <section className="relative border-b border-border">
+        <section className="relative border-b border-border bg-hero">
           <div className="mx-auto grid min-h-[calc(100svh-73px)] max-w-7xl items-center gap-12 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-[minmax(0,0.92fr)_minmax(440px,0.78fr)] lg:px-8 lg:py-24">
             <div className="max-w-2xl">
               <p className="mb-6 font-mono text-xs font-medium uppercase text-primary">
@@ -115,13 +120,13 @@ function HomePage() {
               </dl>
             </div>
 
-            <div id="search" className="scroll-mt-24 rounded-lg border border-border bg-card p-5 shadow-xl sm:p-7">
+            <div id="search" className="scroll-mt-24 rounded-2xl border border-border bg-card p-5 shadow-soft sm:p-7">
               <div className="mb-6 grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4">
                 <div className="min-w-0">
                   <p className="font-display text-2xl font-semibold text-card-foreground">Build your study profile</p>
                   <p className="mt-1 text-sm leading-6 text-muted-foreground">Search, select, and the menu will close automatically.</p>
                 </div>
-                <span className="rounded-sm bg-secondary px-2 py-1 font-mono text-[10px] uppercase text-secondary-foreground">No account needed</span>
+                <span className="rounded-sm bg-secondary px-2 py-1 font-mono text-[10px] uppercase text-secondary-foreground">{user ? "Saved to account" : "No account needed"}</span>
               </div>
 
               <div className="space-y-5">
@@ -169,7 +174,7 @@ function HomePage() {
                 size="lg"
                 disabled={!canStart}
                 onClick={() => setStarted(true)}
-                className="mt-6 h-12 w-full justify-between rounded-md px-5"
+                className="mt-6 h-12 w-full justify-between rounded-full px-6"
               >
                 Create my starting point <ArrowRight />
               </Button>
