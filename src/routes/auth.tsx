@@ -41,7 +41,7 @@ function AuthPage() {
   const [sent, setSent] = useState(false);
 
   useEffect(() => {
-    if (user) navigate({ to: "/" });
+    if (user) navigate({ to: "/dashboard" });
   }, [user, navigate]);
 
   async function onSubmit(e: FormEvent) {
@@ -52,7 +52,7 @@ function AuthPage() {
         const { error } = await supabase.auth.signUp({
           email,
           password,
-          options: { emailRedirectTo: window.location.origin, data: { full_name: name.trim() } },
+          options: { emailRedirectTo: `${window.location.origin}/auth`, data: { full_name: name.trim() } },
         });
         if (error) throw error;
         setSent(true);
@@ -69,7 +69,7 @@ function AuthPage() {
   }
 
   async function google() {
-    const result = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin });
+    const result = await lovable.auth.signInWithOAuth("google", { redirect_uri: `${window.location.origin}/auth` });
     if (result.error) toast.error("Google sign-in failed. Please try again.");
   }
 
