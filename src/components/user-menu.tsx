@@ -21,7 +21,7 @@ export function UserMenu() {
     );
   }
 
-  const name = (user.user_metadata?.full_name as string | undefined) ?? user.email ?? "Student";
+  const name = (user.user_metadata?.["full_name"] as string | undefined) ?? user.email ?? "Student";
   return (
     <div className="flex items-center gap-3">
       <span className="grid size-9 place-items-center rounded-full bg-primary font-display text-sm font-semibold text-primary-foreground">
