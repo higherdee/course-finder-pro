@@ -8,6 +8,13 @@
       "when": 1790931375474,
       "tag": "0000_migration",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1790931796815,
+      "tag": "0001_harden_profiles_and_downloads",
+      "breakpoints": true
     }
   ]
 }
