@@ -1,10 +1,4 @@
-<!-- LOVABLE:BEGIN -->
-> [!IMPORTANT]
-> This project is connected to [Lovable](https://lovable.dev). Avoid rewriting
-> published git history — force pushing, or rebasing/amending/squashing commits
-> that are already pushed — as it rewrites history on Lovable's side and the
-> user will likely lose their project history.
->
-> Commits you push to the connected branch sync back to Lovable and show up in
-> the editor, so keep the branch in a working state.
-<!-- LOVABLE:END -->
+# Architecture decisions
+
+- Keep the public Syllaboss discovery experience client-side and dataset-backed until accounts or saved profiles are requested, because search does not require persistence.
+- Store the normalized institution and course directories as static JSON imported by the search UI, because this keeps the selector immediate and usable without an external service.
