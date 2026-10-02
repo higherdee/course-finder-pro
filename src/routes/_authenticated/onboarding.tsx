@@ -76,7 +76,7 @@ function Onboarding() {
       .update({ ...values, onboarding_step: next, updated_at: new Date().toISOString() })
       .eq("id", profile!.id);
     setSaving(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     await qc.invalidateQueries({ queryKey: ["profile"] });
     if (next >= 3) {
       toast.success("You're all set!");
@@ -86,14 +86,14 @@ function Onboarding() {
 
   function next() {
     if (step === 0) {
-      if (fullName.trim().length < 2 || !institution || !course) return toast.error("Add your name, school and course");
-      if (phone && !/^\+?[0-9 ]{10,15}$/.test(phone)) return toast.error("Enter a valid phone number");
+      if (fullName.trim().length < 2 || !institution || !course) { toast.error("Add your name, school and course"); return; }
+      if (phone && !/^\+?[0-9 ]{10,15}$/.test(phone)) { toast.error("Enter a valid phone number"); return; }
       save({ full_name: fullName.trim(), phone: phone.trim() || null, institution: institution.label, course: course.label, department: department.trim() || null, level }, 1);
     } else if (step === 1) {
-      if (!referral) return toast.error("Pick one option");
+      if (!referral) { toast.error("Pick one option"); return; }
       save({ referral_source: referral }, 2);
     } else {
-      if (days.length === 0) return toast.error("Pick at least one study day");
+      if (days.length === 0) { toast.error("Pick at least one study day"); return; }
       save({ study_plan: { hours_per_week: hours, days, preferred_time: time, target_cgpa: cgpa, goals: goals.trim() } }, 3);
     }
   }

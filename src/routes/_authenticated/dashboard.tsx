@@ -1,4 +1,4 @@
-import { createFileRoute, Link, Outlet, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
 import { Bot, FileStack, LayoutDashboard, Loader2, Shield, Upload, Wallet } from "lucide-react";
 import { useEffect } from "react";
 
@@ -46,9 +46,9 @@ function DashboardLayout() {
       title="Student"
       footer={
         isAdmin ? (
-          <Link to="/admin" className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm font-medium hover:bg-secondary">
+          <a href="/admin" className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm font-medium hover:bg-secondary">
             <Shield className="size-4 text-primary" /> Admin dashboard
-          </Link>
+          </a>
         ) : null
       }
     >
